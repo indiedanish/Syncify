@@ -18,7 +18,7 @@ import {
   FileText,
   PenBox,
   GraduationCap,
-  MessageCircle
+  MessageCircle,
 } from "lucide-react";
 
 import { checkUser } from "../lib/checkUser";
@@ -29,11 +29,7 @@ const Header = async () => {
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto py-3 px-6 h-16 flex item-center justify-between">
         <Link href="/">
-          <Image
-            src="https://www.pngplay.com/wp-content/uploads/3/Samsung-Logo-Background-PNG-Image.png"
-            width={200}
-            height={30}
-          />
+          <Image src="/logo.png" width={200} height={70} />
         </Link>
 
         <div className="flex items-center space-x-2 md:space-x-4 ">
@@ -77,10 +73,7 @@ const Header = async () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link
-                    href="/feedback"
-                    className="flex items-center gap-2"
-                  >
+                  <Link href="/feedback" className="flex items-center gap-2">
                     <MessageCircle className="h-4 w-4" />
                     Feedback
                   </Link>
