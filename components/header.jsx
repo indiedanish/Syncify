@@ -29,7 +29,7 @@ const Header = async () => {
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto py-3 px-6 h-16 flex item-center justify-between">
         <Link href="/">
-          <Image src="/logo.png" width={200} height={70} />
+          <Image src="/logo2.png" width={200} height={70} />
         </Link>
 
         <div className="flex items-center space-x-2 md:space-x-4 ">
