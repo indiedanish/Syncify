@@ -2,13 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  ArrowRight,
-  Trophy,
-  Target,
-  Sparkles,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/hero";
 import {
   Accordion,
@@ -21,8 +15,13 @@ import { features } from "@/data/features";
 import { testimonial } from "@/data/testimonial";
 import { faqs } from "@/data/faqs";
 import { howItWorks } from "@/data/howItWorks";
+import { getUsersFeedback } from "@/actions/dashboard";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const { feedbacks } = await getUsersFeedback();
+
+  console.log("feedbacks", feedbacks);
+
   return (
     <>
       <div className="grid-background"></div>
@@ -144,6 +143,46 @@ export default function LandingPage() {
                           &quot;
                         </span>
                         {testimonial.quote}
+                        <span className="text-3xl text-primary absolute -bottom-4">
+                          &quot;
+                        </span>
+                      </p>
+                    </blockquote>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+
+            {feedbacks.map((feedback, index) => (
+              <Card key={index} className="bg-background">
+                <CardContent className="pt-6">
+                  <div className="flex flex-col space-y-4">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div className="relative h-12 w-12 flex-shrink-0">
+                        <Image
+                          width={40}
+                          height={40}
+                          src={feedback?.user?.imageUrl}
+                          alt={feedback?.user?.name}
+                          className="rounded-full object-cover border-2 border-primary/20"
+                        />
+                      </div>
+                      <div>
+                        <p className="font-semibold">{feedback?.user?.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {feedback?.user?.role || "Product User"}
+                        </p>
+                        <p className="text-sm text-primary">
+                          {feedback?.company}
+                        </p>
+                      </div>
+                    </div>
+                    <blockquote>
+                      <p className="text-muted-foreground italic relative">
+                        <span className="text-3xl text-primary absolute -top-4 -left-2">
+                          &quot;
+                        </span>
+                        {feedback.comment}
                         <span className="text-3xl text-primary absolute -bottom-4">
                           &quot;
                         </span>

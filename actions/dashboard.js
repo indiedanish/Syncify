@@ -66,3 +66,25 @@ export async function getIndustryInsights() {
 
   return user.industryInsight;
 }
+
+export async function getUsersFeedback() {
+  try {
+    const feedbacks = await db.feedback.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            imageUrl: true,
+          },
+        },
+      },
+    });
+
+    return {
+      feedbacks,
+    };
+  } catch (error) {
+    console.error("Error getting feedback:", error);
+    throw new Error("Failed to get feedback");
+  }
+}

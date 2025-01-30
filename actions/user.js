@@ -66,6 +66,59 @@ export async function updateUser(data) {
   }
 }
 
+
+
+export async function updateUserFeedback(data) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) throw new Error("User not found");
+
+  try {
+    const result = await db.$transaction(
+      async (tx) => {
+        const feedback = await tx.feedback.upsert({
+          where: {
+            userId: user.id, // Ensure we are matching the correct identifier
+          },
+          update: {
+            comment: data.comment,
+            rating: data.rating,
+          },
+          create: {
+            userId: user.id, // Ensure feedback is linked correctly
+            comment: data.comment,
+            rating: data.rating,
+          },
+        });
+
+        // Update user feedback relation if needed (Assumes 1:1 relation)
+        await tx.user.update({
+          where: { id: user.id },
+          data: {
+            feedback: { connect: { id: feedback.id } },
+          },
+        });
+
+        return { feedback };
+      },
+      {
+        timeout: 10000, // default: 5000
+      }
+    );
+
+    revalidatePath("/"); // Ensure UI updates after mutation
+    return { success: true, ...result };
+  } catch (error) {
+    console.error("Error updating feedback:", error.message);
+    throw new Error("Failed to update feedback");
+  }
+}
+
 export async function getUserOnboardingStatus() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");

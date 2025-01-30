@@ -18,12 +18,13 @@ import {
   FileText,
   PenBox,
   GraduationCap,
+  MessageCircle
 } from "lucide-react";
 
-import {checkUser} from "../lib/checkUser"
+import { checkUser } from "../lib/checkUser";
 
 const Header = async () => {
-  await checkUser()
+  await checkUser();
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto py-3 px-6 h-16 flex item-center justify-between">
@@ -44,53 +45,60 @@ const Header = async () => {
                 <span className="hidden md:block">Industry Insights</span>
               </Button>
             </Link>
-   
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="flex items-center gap-2">
-                <StarIcon className="h-4 w-4" />
-                <span className="hidden md:block">Growth Tools</span>
-                <ChevronDown className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem asChild>
-                <Link href="/resume" className="flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
-                  Build Resume
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link
-                  href="/ai-cover-letter"
-                  className="flex items-center gap-2"
-                >
-                  <PenBox className="h-4 w-4" />
-                  Cover Letter
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/interview" className="flex items-center gap-2">
-                  <GraduationCap className="h-4 w-4" />
-                  Interview Prep
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className="flex items-center gap-2">
+                  <StarIcon className="h-4 w-4" />
+                  <span className="hidden md:block">Growth Tools</span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link href="/resume" className="flex items-center gap-2">
+                    <FileText className="h-4 w-4" />
+                    Build Resume
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/ai-cover-letter"
+                    className="flex items-center gap-2"
+                  >
+                    <PenBox className="h-4 w-4" />
+                    Cover Letter
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/interview" className="flex items-center gap-2">
+                    <GraduationCap className="h-4 w-4" />
+                    Interview Prep
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/feedback"
+                    className="flex items-center gap-2"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Feedback
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </SignedIn>
           <DarkMode />
           <UserButton />
           <SignedOut>
             <SignInButton>
-            <Button variant="outline">
+              <Button variant="outline">
                 <span className="hidden md:block">Sign In</span>
               </Button>
             </SignInButton>
           </SignedOut>
         </div>
       </nav>
-
     </header>
   );
 };

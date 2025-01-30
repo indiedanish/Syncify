@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import {
   BarChart,
   Bar,
@@ -16,6 +17,7 @@ import {
   TrendingUp,
   TrendingDown,
   Brain,
+  RotateCcw,
 } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import {
@@ -75,8 +77,15 @@ const DashboardView = ({ insights }) => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <Badge variant="outline">Last updated: {lastUpdatedDate}</Badge>
+      <div className="flex space-x-2 items-center">
+        <Badge variant="">Last updated: {lastUpdatedDate}</Badge>
+        <Badge
+          className={`flex space-x-1 bg-black text-white hover:text-black hover:bg-gray-300`}
+          variant="outline"
+        >
+          <RotateCcw className="h-4 w-4" />
+          <Link href="/onboarding">Re-onboard</Link>
+        </Badge>
       </div>
 
       {/* Market Overview Cards */}
