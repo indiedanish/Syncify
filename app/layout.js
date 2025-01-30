@@ -6,6 +6,7 @@ import {
 } from '@clerk/nextjs'
 import { dark, neobrutalism } from '@clerk/themes'
 import Header from "../components/header";
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "AI Career",
@@ -25,15 +26,16 @@ export default function RootLayout({ children }) {
         <body
           className={`${inter.className}`}
         >
-          <Header />
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
+            <Header />
             <main className="min-h-screen">
               {children}
+              <Toaster/>
             </main>
           </ThemeProvider>
           <footer className="bg-black text-white text-center">

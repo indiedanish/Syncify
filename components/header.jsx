@@ -19,10 +19,14 @@ import {
   PenBox,
   GraduationCap,
 } from "lucide-react";
-const header = () => {
+
+import {checkUser} from "../lib/checkUser"
+
+const Header = async () => {
+  await checkUser()
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto py-3 h-16 flex item-center justify-between">
+      <nav className="container mx-auto py-3 px-6 h-16 flex item-center justify-between">
         <Link href="/">
           <Image
             src="https://www.pngplay.com/wp-content/uploads/3/Samsung-Logo-Background-PNG-Image.png"
@@ -91,4 +95,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
