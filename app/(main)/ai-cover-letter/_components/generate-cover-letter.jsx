@@ -66,10 +66,10 @@ const GenerateCoverLetter = () => {
   const generatePDF = async () => {
     setIsGenerating(true);
     try {
-      const element = document.getElementById("resume-pdf");
+      const element = document.getElementById("cover-letter-pdf");
       const opt = {
         margin: [15, 15],
-        filename: "resume.pdf",
+        filename: "cover-letter.pdf",
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
@@ -192,7 +192,7 @@ const GenerateCoverLetter = () => {
                 )}{" "}
               </div>
 
-              <div id="resume-pdf">
+              <div id="cover-letter-pdf">
                 <MDEditor.Markdown
                   source={updateResult?.coverLetter}
                   style={{
