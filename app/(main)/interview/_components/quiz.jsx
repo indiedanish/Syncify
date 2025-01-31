@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +22,7 @@ export default function Quiz() {
   const [answers, setAnswers] = useState([]);
   const [showExplanation, setShowExplanation] = useState(false);
   const [time, setTime] = useState(0);
+  const intervalRef = useRef(null); 
 
   const {
     loading: generatingQuiz,
@@ -37,17 +38,15 @@ export default function Quiz() {
   } = useFetch(saveQuizResult);
 
   useEffect(() => {
-    let interval = null;
+
     if (quizData) {
       setAnswers(new Array(quizData.length).fill(null));
-      interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setTime((time) => time + 1000);
       }, 1000);
     }
 
-    return () => {
-      clearInterval(interval);
-    };
+    return () => clearInterval(intervalRef.current);
   }, [quizData]);
 
   const formattedTime = format(
@@ -82,8 +81,10 @@ export default function Quiz() {
 
   const finishQuiz = async () => {
     const score = calculateScore();
+    clearInterval(intervalRef.current);
     try {
       await saveQuizResultFn(quizData, answers, score, time);
+      setTime(0)
       toast.success("Quiz completed!");
     } catch (error) {
       toast.error(error.message || "Failed to save quiz results");
