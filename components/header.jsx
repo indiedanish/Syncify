@@ -18,6 +18,7 @@ import {
   PenBox,
   GraduationCap,
   MessageCircle,
+  LogIn,
 } from "lucide-react";
 
 import { checkUser } from "../lib/checkUser";
@@ -93,6 +94,7 @@ const Header = async () => {
           <SignedOut>
             <SignInButton>
               <Button variant="outline">
+                <LogIn className="h-4 w-4" />
                 <span className="hidden md:block">Sign In</span>
               </Button>
             </SignInButton>
