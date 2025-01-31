@@ -123,7 +123,7 @@ export default async function LandingPage() {
                           width={40}
                           height={40}
                           src={testimonial.image}
-                          alt={testimonial.author}
+                          alt={testimonial.image}
                           className="rounded-full object-cover border-2 border-primary/20"
                         />
                       </div>
@@ -163,7 +163,7 @@ export default async function LandingPage() {
                           width={40}
                           height={40}
                           src={feedback?.user?.imageUrl}
-                          alt={feedback?.user?.name}
+                          alt={feedback?.user?.imageUrl}
                           className="rounded-full object-cover border-2 border-primary/20"
                         />
                       </div>
