@@ -54,8 +54,10 @@ const GenerateCoverLetter = () => {
   useEffect(() => {
     if (updateResult?.success && !updateLoading) {
       toast.success("Cover Letter has been generated successfully!");
-      //   router.push("/");
-      //   router.refresh();
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth", 
+      });
     }
   }, [updateResult, updateLoading]);
 
@@ -98,7 +100,7 @@ const GenerateCoverLetter = () => {
                 <Label>Company Name</Label>
                 <Input
                   className="my-1"
-                  onValueChange={(value) => {
+                  onChange={(value) => {
                     setValue("companyName", value);
                   }}
                   id="companyName"
@@ -116,7 +118,7 @@ const GenerateCoverLetter = () => {
                 <Label>Job Title</Label>
                 <Input
                   className="my-1"
-                  onValueChange={(value) => {
+                  onChange={(value) => {
                     setValue("jobTitle", value);
                   }}
                   id="jobTitle"
@@ -135,7 +137,7 @@ const GenerateCoverLetter = () => {
               <Label>Job Description</Label>
 
               <Textarea
-                onValueChange={(value) => {
+                onChange={(value) => {
                   setValue("jobDescription", value);
                 }}
                 id="jobDescription"

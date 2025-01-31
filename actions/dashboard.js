@@ -121,7 +121,7 @@ export async function generateCoverLetter(data) {
     - Directly ready to send.
     - Be **fully written** with **no placeholders** (e.g., no text like "[mention this]" or "[describe that]").
     - Start with Dear and end with Regards
-    
+
     Do not include any of the following:
     - Mentions like "previous company," "platform where the ad was seen," or anything that requires further input or explanation.
     - Any statements that need additional context, e.g., "mention this specific area of work" or "describe a relevant accomplishment."
@@ -132,7 +132,6 @@ export async function generateCoverLetter(data) {
     
     Do **not** include extra explanations or formatting.
   `;
-    console.log("geenratee");
     const result = await model.generateContent(prompt);
     const response = result.response;
     const coverLetter = response.text().trim();
