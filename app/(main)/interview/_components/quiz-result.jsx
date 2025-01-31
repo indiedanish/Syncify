@@ -2,9 +2,10 @@
 
 import { Trophy, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-
+import { intervalToDuration , formatDuration } from "date-fns";
 export default function QuizResult({
   result,
   hideStartNew = false,
@@ -12,6 +13,16 @@ export default function QuizResult({
 }) {
   if (!result) return null;
 
+  const formattedTime = (time) => {
+    const duration = intervalToDuration({ start: 0, end: time });
+
+    // Format duration into human-readable text
+    const formattedTime = formatDuration(duration, {
+      format: ["hours", "minutes", "seconds"],
+    });
+
+    return formattedTime;
+  };
   return (
     <div className="mx-auto">
       <h1 className="flex items-center gap-2 text-3xl gradient-title">
@@ -36,7 +47,10 @@ export default function QuizResult({
 
         {/* Questions Review */}
         <div className="space-y-4">
-          <h3 className="font-medium">Question Review</h3>
+          <div className="flex justify-between">
+            <h3 className="font-medium">Question Review</h3>
+            <Badge variant="outline">Time Taken: {formattedTime(result.timeTaken)}</Badge>
+          </div>
           {result.questions.map((q, index) => (
             <div key={index} className="border rounded-lg p-4 space-y-2">
               <div className="flex items-start justify-between gap-2">
