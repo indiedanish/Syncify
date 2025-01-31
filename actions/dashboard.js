@@ -88,3 +88,56 @@ export async function getUsersFeedback() {
     throw new Error("Failed to get feedback");
   }
 }
+
+export async function generateCoverLetter(data) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) throw new Error("User not found");
+
+  try {
+    const prompt = `
+    Generate a personalized cover letter for a ${
+      user.industry
+    } professional applying for the position of ${data.jobTitle} at ${
+      data.companyName
+    }. 
+    The applicant's name is ${user.name} and has expertise in ${
+      user.skills?.length ? user.skills.join(", ") : "various relevant skills"
+    }.
+
+    The cover letter should be structured as follows:
+    - Introduction: Express enthusiasm for the role and the company.
+    - Skills & Experience: Highlight relevant expertise and accomplishments.
+    - Alignment with Job Description: Explain how the applicant's skills align with the job requirements.
+    - Conclusion: Express eagerness for an interview and appreciation for the opportunity.
+    - Concise (no more than 3 short paragraphs).
+    - Natural, conversational, and engaging.
+    - Fully written with **no placeholders** like "[mention this]" or "[describe that]".
+    - Directly ready to send.
+    - Be **fully written** with **no placeholders** (e.g., no text like "[mention this]" or "[describe that]").
+    - Start with Dear and end with Regards
+    
+    Do not include any of the following:
+    - Mentions like "previous company," "platform where the ad was seen," or anything that requires further input or explanation.
+    - Any statements that need additional context, e.g., "mention this specific area of work" or "describe a relevant accomplishment."
+    
+    Format it as follows:
+    "Cover Letter:
+    [Generated Cover Letter]"
+    
+    Do **not** include extra explanations or formatting.
+  `;
+    console.log("geenratee");
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const coverLetter = response.text().trim();
+    return { success: true, coverLetter };
+  } catch (error) {
+    console.error("Error generating cover letter:", error);
+  }
+}

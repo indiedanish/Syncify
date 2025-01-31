@@ -66,8 +66,6 @@ export async function updateUser(data) {
   }
 }
 
-
-
 export async function updateUserFeedback(data) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
@@ -147,3 +145,4 @@ export async function getUserOnboardingStatus() {
     throw new Error("Failed to check onboarding status");
   }
 }
+
