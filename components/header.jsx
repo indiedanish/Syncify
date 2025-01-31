@@ -3,7 +3,6 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import DarkMode from "./ui/dark-mode";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -90,7 +89,6 @@ const Header = async () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </SignedIn>
-          <DarkMode />
           <UserButton />
           <SignedOut>
             <SignInButton>
