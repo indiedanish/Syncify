@@ -23,7 +23,6 @@ import useFetch from "@/hooks/use-fetch";
 import { generateCoverLetter } from "@/actions/dashboard";
 import { useRouter } from "next/navigation";
 
-import { APP_CONFIGS } from "@/config";
 
 const GenerateCoverLetter = () => {
   const router = useRouter();

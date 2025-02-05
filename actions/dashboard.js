@@ -140,7 +140,7 @@ export async function generateCoverLetter(data) {
   } catch (error) {
     console.error("Error generating cover letter:", error);
     throw new Error(
-      "Oops! Gemini took a coffee break ☕️ daily limit reached. Freemium life, am I right? Try again later! 🚀"
+      "Oops! Gemini took a coffee break ☕️ daily limit reached. Freemium life, am I right? Try again later! 🚀" 
     );
 
   }
