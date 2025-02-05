@@ -21,8 +21,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { coverLetterSchema } from "@/app/lib/schema";
 import useFetch from "@/hooks/use-fetch";
 import { generateCoverLetter } from "@/actions/dashboard";
-
 import { useRouter } from "next/navigation";
+
+import { APP_CONFIGS } from "@/config";
+
 const GenerateCoverLetter = () => {
   const router = useRouter();
 
@@ -56,8 +58,12 @@ const GenerateCoverLetter = () => {
       toast.success("Cover Letter has been generated successfully!");
       window.scrollTo({
         top: document.body.scrollHeight,
-        behavior: "smooth", 
+        behavior: "smooth",
       });
+    }
+
+    if (!updateResult?.success) {
+      toast.success(updateResult?.message || APP_CONFIGS.globalErrorFallback);
     }
   }, [updateResult, updateLoading]);
 
@@ -167,7 +173,7 @@ const GenerateCoverLetter = () => {
             </Button>
           </CardFooter>
         </form>
-        {updateResult ? (
+        {updateResult?.success ? (
           <div className="py-5 space-x-2">
             <CardContent className="flex flex-col gap-3">
               <div className="w-full flex justify-end">

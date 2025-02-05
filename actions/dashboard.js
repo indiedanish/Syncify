@@ -138,5 +138,9 @@ export async function generateCoverLetter(data) {
     return { success: true, coverLetter };
   } catch (error) {
     console.error("Error generating cover letter:", error);
+    return {
+      success: false,
+      message: "Gemini model failed to responed back! Try later",
+    };
   }
 }
