@@ -140,7 +140,7 @@ export async function generateCoverLetter(data) {
     console.error("Error generating cover letter:", error);
     return {
       success: false,
-      message: "Gemini model failed to responed back! Try later",
+      message: "Oops! Gemini took a coffee break ☕️ daily limit reached. Freemium life, am I right? Try again later! 🚀",
     };
   }
 }
