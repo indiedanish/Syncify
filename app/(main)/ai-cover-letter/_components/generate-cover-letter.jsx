@@ -61,10 +61,6 @@ const GenerateCoverLetter = () => {
         behavior: "smooth",
       });
     }
-
-    if (!updateResult?.success === false) {
-      toast.success(updateResult?.message || APP_CONFIGS.globalErrorFallback);
-    }
   }, [updateResult, updateLoading]);
 
   const [isGenerating, setIsGenerating] = useState(false);

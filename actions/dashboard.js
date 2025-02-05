@@ -135,12 +135,13 @@ export async function generateCoverLetter(data) {
     const result = await model.generateContent(prompt);
     const response = result.response;
     const coverLetter = response.text().trim();
+    
     return { success: true, coverLetter };
   } catch (error) {
     console.error("Error generating cover letter:", error);
-    return {
-      success: false,
-      message: "Oops! Gemini took a coffee break ☕️ daily limit reached. Freemium life, am I right? Try again later! 🚀",
-    };
+    throw new Error(
+      "Oops! Gemini took a coffee break ☕️ daily limit reached. Freemium life, am I right? Try again later! 🚀"
+    );
+
   }
 }
