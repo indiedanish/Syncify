@@ -62,7 +62,7 @@ const GenerateCoverLetter = () => {
       });
     }
 
-    if (!updateResult?.success) {
+    if (!updateResult?.success === false) {
       toast.success(updateResult?.message || APP_CONFIGS.globalErrorFallback);
     }
   }, [updateResult, updateLoading]);
